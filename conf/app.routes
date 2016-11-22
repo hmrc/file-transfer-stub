@@ -1,3 +1,7 @@
 # microservice specific routes
 
-GET        /hello-world             uk.gov.hmrc.filetransfer.controllers.MicroserviceHelloWorld.hello
+GET           /hello-world                  uk.gov.hmrc.filetransfer.controllers.MicroserviceHelloWorld.hello
+
+GET           /envelopes                    uk.gov.hmrc.filetransfer.controllers.transfer.TransferController.list()
+GET           /envelopes/:envelopeId        uk.gov.hmrc.filetransfer.controllers.transfer.TransferController.download(envelopeId: uk.gov.hmrc.filetransfer.EnvelopeId)
+DELETE        /envelopes/:envelopeId        uk.gov.hmrc.filetransfer.controllers.transfer.TransferController.delete(envelopeId: uk.gov.hmrc.filetransfer.EnvelopeId)
