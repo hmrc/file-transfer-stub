@@ -30,6 +30,7 @@ trait MicroService {
     .enablePlugins(Seq(play.sbt.PlayScala,SbtAutoBuildPlugin, SbtGitVersioning, SbtDistributablesPlugin, SbtArtifactory) ++ plugins : _*)
     .settings(playSettings : _*)
     .settings(scalaSettings: _*)
+    .settings(publishingSettings: _*)
     .settings(defaultSettings(): _*)
     .settings(majorVersion := 0)
     .settings(
