@@ -16,12 +16,13 @@
 
 package uk.gov.hmrc.filetransfer
 
-import com.typesafe.config.Config
-import net.ceedubs.ficus.Ficus._
 import play.api._
 import play.api.mvc._
 import uk.gov.hmrc.play.config.ControllerConfig
+import net.ceedubs.ficus.Ficus._
+import com.typesafe.config.Config
 import uk.gov.hmrc.play.microservice.filters.{LoggingFilter, MicroserviceFilterSupport}
+
 
 object ControllerConfiguration extends ControllerConfig {
   lazy val controllerConfigs = Play.current.configuration.underlying.as[Config]("controllers")
