@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 HM Revenue & Customs
+ * Copyright 2018 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,12 @@
 
 package uk.gov.hmrc.filetransfer
 
+import com.typesafe.config.Config
+import net.ceedubs.ficus.Ficus._
 import play.api._
 import play.api.mvc._
 import uk.gov.hmrc.play.config.ControllerConfig
-import net.ceedubs.ficus.Ficus._
-import com.typesafe.config.Config
-import uk.gov.hmrc.play.http.logging.filters.LoggingFilter
-import uk.gov.hmrc.play.filters.MicroserviceFilterSupport
+import uk.gov.hmrc.play.microservice.filters.{LoggingFilter, MicroserviceFilterSupport}
 
 object ControllerConfiguration extends ControllerConfig {
   lazy val controllerConfigs = Play.current.configuration.underlying.as[Config]("controllers")

@@ -15,11 +15,11 @@ private object AppDependencies {
   import play.core.PlayVersion
 
 
-  private val microserviceBootstrapVersion = "5.8.0"
-  private val playHealthVersion = "2.0.0"
-  private val playConfigVersion = "3.0.0"
+  private val microserviceBootstrapVersion = "8.3.0"
+  private val playHealthVersion = "3.7.0-play-25"
+  private val playConfigVersion = "7.0.0"
   private val logbackJsonLoggerVersion = "3.1.0"
-  private val hmrcTestVersion = "2.1.0"
+  private val hmrcTestVersion = "3.1.0"
   private val scalaTestVersion = "2.2.6"
   private val pegdownVersion = "1.6.0"
   private val playUrlBindersVersion = "1.1.0"
