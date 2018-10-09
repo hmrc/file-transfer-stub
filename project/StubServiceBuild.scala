@@ -22,7 +22,7 @@ private object AppDependencies {
   private val hmrcTestVersion = "3.1.0"
   private val scalaTestVersion = "2.2.6"
   private val pegdownVersion = "1.6.0"
-  private val playUrlBindersVersion = "1.1.0"
+  private val playUrlBindersVersion = "2.1.0"
 
   val compile = Seq(
     ws,
