@@ -17,20 +17,16 @@
 package uk.gov.hmrc.filetransfer.controllers.transfer
 
 import controllers.Assets
+import javax.inject.Inject
 import play.api.libs.json.Json
-import play.api.mvc.{Action, AnyContent}
+import play.api.mvc._
 import uk.gov.hmrc.filetransfer.EnvelopeId
-import uk.gov.hmrc.play.microservice.controller.BaseController
+import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
 
-import scala.concurrent.{ExecutionContext, Future}
-import scala.language.postfixOps
-import play.api.libs.concurrent.Execution.Implicits._
+class TransferController @Inject()(mcc: MessagesControllerComponents, assets: Assets)
+  extends BackendController(mcc) {
 
-object TransferController extends TransferController
-
-class TransferController()(implicit executionContext: ExecutionContext) extends BaseController {
-
-  def list() = Action.async { implicit request =>
+  def list(): Action[AnyContent] = Action {
     val result =
       s"""
          |{
@@ -94,14 +90,14 @@ class TransferController()(implicit executionContext: ExecutionContext) extends 
          |}
        """.stripMargin
 
-    Future.successful(Ok(Json.parse(result)))
+    Ok(Json.parse(result))
   }
 
   def download(envelopeId: EnvelopeId): Action[AnyContent] = {
-    Assets.at(path = "/public", file = "transfer/envelope.zip")
+    assets.at(path = "/public", file = "transfer/envelope.zip")
   }
 
-  def delete(envelopeId: EnvelopeId) = Action.async { implicit request =>
-    Future.successful(Ok)
+  def delete(envelopeId: EnvelopeId): Action[AnyContent] = Action {
+    Ok
   }
 }
