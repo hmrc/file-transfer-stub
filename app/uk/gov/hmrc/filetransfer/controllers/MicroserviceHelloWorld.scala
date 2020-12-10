@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 HM Revenue & Customs
+ * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,16 +16,13 @@
 
 package uk.gov.hmrc.filetransfer.controllers
 
-import uk.gov.hmrc.play.microservice.controller.BaseController
-import uk.gov.hmrc.play.http.logging.MdcLoggingExecutionContext._
+import javax.inject.Inject
+import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
 import play.api.mvc._
-import scala.concurrent.Future
 
-object MicroserviceHelloWorld extends MicroserviceHelloWorld
+class MicroserviceHelloWorld @Inject() (mcc: MessagesControllerComponents) extends BackendController(mcc) {
 
-trait MicroserviceHelloWorld extends BaseController {
-
-	def hello() = Action.async { implicit request =>
-		Future.successful(Ok("Hello world"))
+	def hello(): Action[AnyContent] = Action {
+		Ok("Hello world")
 	}
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 HM Revenue & Customs
+ * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,26 +16,23 @@
 
 package uk.gov.hmrc.filetransfer.controllers
 
+import org.scalatest.{Matchers, WordSpec}
+import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.http.Status
 import play.api.test.FakeRequest
-import play.api.http.Status
-import play.api.test.FakeRequest
-import uk.gov.hmrc.play.test.UnitSpec
-import uk.gov.hmrc.play.test.WithFakeApplication
-import uk.gov.hmrc.play.test.{UnitSpec, WithFakeApplication}
+import play.api.test.Helpers._
+import play.api.test.Helpers.stubMessagesControllerComponents
 
+class MicroserviceHelloWorldControllerSpec extends WordSpec with Matchers with GuiceOneAppPerSuite {
 
-class MicroserviceHelloWorldControllerSpec extends UnitSpec with WithFakeApplication{
-
-  val fakeRequest = FakeRequest("GET", "/")
-
+  private val fakeRequest = FakeRequest("GET", "/")
 
   "GET /" should {
     "return 200" in {
-      val result = MicroserviceHelloWorld.hello()(fakeRequest)
+      val controller = new MicroserviceHelloWorld(stubMessagesControllerComponents())
+      val result = controller.hello()(fakeRequest)
       status(result) shouldBe Status.OK
     }
   }
-
 
 }

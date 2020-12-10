@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 HM Revenue & Customs
+ * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ import java.util.UUID
 
 import play.api.libs.json._
 import play.api.mvc.PathBindable
-import uk.gov.hmrc.play.binders.SimpleObjectBinder
 
 case class EnvelopeId(value: String = UUID.randomUUID().toString) extends AnyVal {
   override def toString = value
@@ -37,5 +36,8 @@ object EnvelopeId {
     }
   }
   implicit val binder: PathBindable[EnvelopeId] =
-    new SimpleObjectBinder[EnvelopeId](EnvelopeId.apply, _.value)
+    new PathBindable[EnvelopeId] {
+      override def bind(key: String, value: String): Either[String, EnvelopeId] = Right(EnvelopeId(value))
+      override def unbind(key: String, value: EnvelopeId): String = value.value
+    }
 }
