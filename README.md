@@ -2,7 +2,7 @@
 
 [ ![Download](https://api.bintray.com/packages/hmrc/releases/file-transfer-stub/images/download.svg) ](https://bintray.com/hmrc/releases/file-transfer-stub/_latestVersion)
 
-This is a placeholder README.md for a new repository
+Provides a stub implementation of file-transfer to aid integration tests.
 
 ### License
 
