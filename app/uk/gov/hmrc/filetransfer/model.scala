@@ -26,18 +26,21 @@ case class EnvelopeId(value: String = UUID.randomUUID().toString) extends AnyVal
 }
 
 object EnvelopeId {
-  implicit val writes = new Writes[EnvelopeId] {
-    def writes(id: EnvelopeId): JsValue = JsString(id.value)
-  }
-  implicit val reads = new Reads[EnvelopeId] {
-    def reads(json: JsValue): JsResult[EnvelopeId] = json match {
-      case JsString(value) => JsSuccess(EnvelopeId(value))
-      case _ => JsError("invalid envelopeId")
-    }
-  }
+  implicit val writes: Writes[EnvelopeId] =
+    (id: EnvelopeId) => JsString(id.value)
+
+  implicit val reads: Reads[EnvelopeId] =
+    (json: JsValue) =>
+      json match {
+        case JsString(value) => JsSuccess(EnvelopeId(value))
+        case _ => JsError("invalid envelopeId")
+      }
+
   implicit val binder: PathBindable[EnvelopeId] =
     new PathBindable[EnvelopeId] {
-      override def bind(key: String, value: String): Either[String, EnvelopeId] = Right(EnvelopeId(value))
-      override def unbind(key: String, value: EnvelopeId): String = value.value
+      override def bind(key: String, value: String): Either[String, EnvelopeId] =
+        Right(EnvelopeId(value))
+      override def unbind(key: String, value: EnvelopeId): String =
+        value.value
     }
 }

@@ -26,7 +26,7 @@ import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
 class TransferController @Inject()(mcc: MessagesControllerComponents, assets: Assets)
   extends BackendController(mcc) {
 
-  def list(): Action[AnyContent] = Action {
+  val list: Action[AnyContent] = Action {
     val result =
       s"""
          |{
@@ -93,9 +93,8 @@ class TransferController @Inject()(mcc: MessagesControllerComponents, assets: As
     Ok(Json.parse(result))
   }
 
-  def download(envelopeId: EnvelopeId): Action[AnyContent] = {
+  def download(envelopeId: EnvelopeId): Action[AnyContent] =
     assets.at(path = "/public", file = "transfer/envelope.zip")
-  }
 
   def delete(envelopeId: EnvelopeId): Action[AnyContent] = Action {
     Ok
