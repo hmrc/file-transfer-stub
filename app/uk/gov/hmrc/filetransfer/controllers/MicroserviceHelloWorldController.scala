@@ -18,11 +18,11 @@ package uk.gov.hmrc.filetransfer.controllers
 
 import javax.inject.Inject
 import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
-import play.api.mvc._
+import play.api.mvc.{Action, AnyContent, ControllerComponents}
 
-class MicroserviceHelloWorld @Inject() (mcc: MessagesControllerComponents) extends BackendController(mcc) {
+class MicroserviceHelloWorldController @Inject() (mcc: ControllerComponents) extends BackendController(mcc) {
 
-	def hello(): Action[AnyContent] = Action {
-		Ok("Hello world")
-	}
+  val hello: Action[AnyContent] = Action {
+    Ok("Hello world")
+  }
 }
