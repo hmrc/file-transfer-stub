@@ -14,23 +14,26 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.filetransfer.controllers
+package uk.gov.hmrc.filetransfer.controller
 
+import controllers.Assets
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
+import org.scalatestplus.mockito.MockitoSugar
 import play.api.http.Status
-import play.api.test.Helpers._
+import play.api.test.Helpers.*
 import play.api.test.{FakeRequest, Helpers}
 
-class MicroserviceHelloWorldControllerSpec extends AnyWordSpec with Matchers {
+class TransferControllerControllerSpec
+  extends AnyWordSpec
+     with Matchers
+     with MockitoSugar:
 
   private val fakeRequest = FakeRequest("GET", "/")
-  private val controller = new MicroserviceHelloWorldController(Helpers.stubControllerComponents())
+  private val assets = mock[Assets]
+  private val controller = new TransferController(stubMessagesControllerComponents(), assets)
 
-  "GET /" should {
-    "return 200" in {
-      val result = controller.hello()(fakeRequest)
+  "GET /envelopes" should:
+    "return 200" in:
+      val result = controller.list(fakeRequest)
       status(result) shouldBe Status.OK
-    }
-  }
-}
