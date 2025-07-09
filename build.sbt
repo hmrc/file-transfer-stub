@@ -1,13 +1,10 @@
-import uk.gov.hmrc.DefaultBuildSettings.integrationTestSettings
-import uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin.publishingSettings
+ThisBuild / majorVersion  := 1
+ThisBuild / scalaVersion  := "3.3.6"
+ThisBuild / scalacOptions += "-Wconf:msg=Flag.*repeatedly:s"
 
 lazy val microservice = Project("file-transfer-stub", file("."))
-  .enablePlugins(play.sbt.PlayScala, SbtDistributablesPlugin)
+  .enablePlugins(PlayScala, SbtDistributablesPlugin)
   .settings(
-    majorVersion        :=  1,
-    scalaVersion        :=  "2.13.12",
     libraryDependencies ++= AppDependencies.compile ++ AppDependencies.test,
-    scalacOptions       +=  "-Wconf:src=routes/.*&cat=unused-imports:s",
-    scalacOptions       +=  "-Wconf:src=routes/.*&cat=unused:s"
+    scalacOptions += "-Wconf:src=routes/.*:s"
   )
-  .settings(resolvers += Resolver.jcenterRepo)

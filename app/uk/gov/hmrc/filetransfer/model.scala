@@ -21,26 +21,25 @@ import java.util.UUID
 import play.api.libs.json._
 import play.api.mvc.PathBindable
 
-case class EnvelopeId(value: String = UUID.randomUUID().toString) extends AnyVal {
+case class EnvelopeId(
+  value: String = UUID.randomUUID().toString
+) extends AnyVal:
   override def toString = value
-}
 
-object EnvelopeId {
-  implicit val writes: Writes[EnvelopeId] =
+object EnvelopeId:
+  val writes: Writes[EnvelopeId] =
     (id: EnvelopeId) => JsString(id.value)
 
-  implicit val reads: Reads[EnvelopeId] =
+  val reads: Reads[EnvelopeId] =
     (json: JsValue) =>
-      json match {
+      json match
         case JsString(value) => JsSuccess(EnvelopeId(value))
-        case _ => JsError("invalid envelopeId")
-      }
+        case _               => JsError("invalid envelopeId")
 
   implicit val binder: PathBindable[EnvelopeId] =
-    new PathBindable[EnvelopeId] {
+    new PathBindable[EnvelopeId]:
       override def bind(key: String, value: String): Either[String, EnvelopeId] =
         Right(EnvelopeId(value))
+
       override def unbind(key: String, value: EnvelopeId): String =
         value.value
-    }
-}
